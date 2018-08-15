@@ -1,0 +1,29 @@
+---
+title: "Dado"
+author: "Galileo Cappella"
+date: "August 15, 2018"
+output: html_document
+---
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+pruebaTirada <- c()
+pruebaSuma <- c()
+
+for (i in 1:1000000) {
+  dsix <- sample(1:6, 13, TRUE)
+  suma <- cumsum(dsix)
+  primero <- which(suma > 12)[1]
+  pruebaTirada[i] <- primero
+  pruebaSuma[i] <- suma[primero]
+}
+
+ggplot(as.data.frame(x = pruebaSuma)) +
+  geom_histogram(aes(pruebaSuma))
+
+ggplot(as.data.frame(x = pruebaTirada)) +
+  geom_histogram(aes(pruebaTirada))
+```
